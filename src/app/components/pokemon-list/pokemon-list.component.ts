@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PokemonService } from '../../services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -7,6 +8,14 @@ import { Component } from '@angular/core';
 })
 export class PokemonListComponent {
 
-    pokemons = ['Bulbassaur', 'Ivysaur', 'Venousar', 'Charmander'];
+    pokemons: any = [];
+
+    constructor(private pokemonService: PokemonService) {}
+
+    ngOnInit() {
+        this.pokemonService.carregarPokemons().subscribe((pokemons: any) => {
+            this.pokemons = pokemons;
+        });
+    }
 
 }
